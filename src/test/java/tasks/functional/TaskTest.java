@@ -13,12 +13,7 @@ public class TaskTest {
 
     @BeforeAll
     public static void setup(){
-        System.setProperty("webdriver.chrome.driver","src/test/resource/chromedriver");
-    }
-
-    @BeforeEach
-    public void setupEach(){
-        driver.navigate().to("http://localhost:8001/tasks");
+        System.setProperty("webdriver.chrome.driver","/usr/chromedriver");
     }
 
     @AfterEach
@@ -28,6 +23,8 @@ public class TaskTest {
 
     @Test
     public void deveSalvarTarefa() {
+
+        driver.navigate().to("http://localhost:8001/tasks");
 
         // click add todo
         driver.findElement(By.id("addTodo")).click();
@@ -50,6 +47,8 @@ public class TaskTest {
     @Test
     public void naoDeveSalvarTarefaComDataNoPassado() {
 
+        driver.navigate().to("http://localhost:8001/tasks");
+
         // click add todo
         driver.findElement(By.id("addTodo")).click();
 
@@ -71,6 +70,8 @@ public class TaskTest {
     @Test
     public void naoDeveSalvarTarefaSemData() {
 
+        driver.navigate().to("http://localhost:8001/tasks");
+
         // click add todo
         driver.findElement(By.id("addTodo")).click();
 
@@ -89,6 +90,8 @@ public class TaskTest {
 
     @Test
     public void naoDeveSalvarTarefaSemDescricao() {
+
+        driver.navigate().to("http://localhost:8001/tasks");
 
         // click add todo
         driver.findElement(By.id("addTodo")).click();
