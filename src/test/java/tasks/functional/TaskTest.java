@@ -1,28 +1,35 @@
 package tasks.functional;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
 
-    WebDriver driver = new ChromeDriver();
+    DesiredCapabilities cap = new DesiredCapabilities(new ChromeOptions());
+    WebDriver driver;
 
-    @BeforeAll
-    public static void setup(){
-        System.setProperty("webdriver.chrome.driver","/usr/chromedriver");
+    private void setup() throws MalformedURLException {
+         driver = new RemoteWebDriver(new URL("http://172.23.0.1:4444/wd/hub"), cap);
     }
 
     @AfterEach
-    public void afterEach(){
+    public void afterEach() {
         driver.close();
     }
 
     @Test
-    public void deveSalvarTarefa() {
+    public void deveSalvarTarefa() throws MalformedURLException {
+        setup();
 
         driver.navigate().to("http://localhost:8001/tasks");
 
@@ -45,7 +52,8 @@ public class TaskTest {
     }
 
     @Test
-    public void naoDeveSalvarTarefaComDataNoPassado() {
+    public void naoDeveSalvarTarefaComDataNoPassado() throws MalformedURLException {
+        setup();
 
         driver.navigate().to("http://localhost:8001/tasks");
 
@@ -68,7 +76,8 @@ public class TaskTest {
     }
 
     @Test
-    public void naoDeveSalvarTarefaSemData() {
+    public void naoDeveSalvarTarefaSemData() throws MalformedURLException {
+        setup();
 
         driver.navigate().to("http://localhost:8001/tasks");
 
@@ -87,9 +96,9 @@ public class TaskTest {
 
     }
 
-
     @Test
-    public void naoDeveSalvarTarefaSemDescricao() {
+    public void naoDeveSalvarTarefaSemDescricao() throws MalformedURLException {
+        setup();
 
         driver.navigate().to("http://localhost:8001/tasks");
 
