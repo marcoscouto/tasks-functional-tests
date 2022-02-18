@@ -11,6 +11,10 @@ public class TaskTest {
 
     WebDriver driver = new ChromeDriver();
 
+    @BeforeAll
+    public static void setup(){
+        System.setProperty("webdriver.chrome.driver","src/test/resource/chromedriver");
+    }
 
     @BeforeEach
     public void setupEach(){
